@@ -376,8 +376,8 @@ V.fin=function(){
     '<div class="card"><h3>Прибыль</h3><div class="big">'+R(profit)+'</div><span class="delta'+(profit<0?' red':'')+'">'+(profit<0?'убыток':'до налогов')+'</span></div>'+
    '</div>'+
    '<div class="grid g21" style="margin-top:16px">'+
-    '<div class="card"><h3>Расходы по категориям</h3><div class="sub">Зарплата подтягивается из выработки автоматически</div><table class="tbl"><tbody>'+
-     cats.map(function(c){return '<tr><td style="padding:12px 6px"><b>'+c+'</b></td><td style="width:38%">'+prog(cat[c]/mx*100)+'</td><td style="text-align:right;white-space:nowrap;padding:12px 6px">'+R(cat[c])+'</td></tr>'}).join('')+'</tbody></table></div>'+
+    '<div class="card"><h3>Расходы по категориям</h3><div class="sub">Зарплата подтягивается из выработки автоматически</div><div style="margin-top:8px">'+
+     cats.map(function(c){return '<div style="padding:10px 2px;border-bottom:1px solid var(--line)"><div style="display:flex;justify-content:space-between;gap:12px;align-items:baseline"><b style="min-width:0">'+c+'</b><span style="white-space:nowrap">'+R(cat[c])+'</span></div><div style="margin-top:7px">'+prog(cat[c]/mx*100)+'</div></div>'}).join('')+'</div></div>'+
     '<div class="card"><h3>Записать операцию</h3><div class="addrow"><select id="cfKind"><option value="E">Расход</option><option value="I">Доход</option></select><input id="cfCat" placeholder="Категория"><input id="cfAmt" inputmode="decimal" placeholder="Сумма, ₽"><button class="btn blue" id="cfAdd">Записать</button></div></div>'+
    '</div>'+
    '<div class="card" style="margin-top:16px"><h3>Последние операции</h3><div class="scroll"><table class="tbl"><thead><tr><th>Вид</th><th>Категория</th><th>Сумма</th><th>Заметка</th></tr></thead><tbody>'+
