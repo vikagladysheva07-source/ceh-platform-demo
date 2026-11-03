@@ -157,6 +157,56 @@ button{font:inherit;color:inherit;cursor:pointer}
 button.card{font:inherit;color:inherit;cursor:pointer;width:100%;text-align:left;transition:transform .15s,box-shadow .15s}
 button.card:hover{transform:translateY(-2px);box-shadow:0 18px 34px -18px rgba(18,20,28,.25)}
 button.chip{font:inherit;font-size:12.5px;font-weight:600;cursor:pointer}
+.pipe{display:grid;grid-template-columns:1fr auto 1fr auto 1fr auto 1fr auto 1fr;gap:10px;align-items:stretch;margin-top:18px}
+.pnode{background:var(--soft);border:1px solid var(--line);border-radius:22px;padding:14px;display:flex;flex-direction:column;gap:2px;min-height:150px}
+.pnode.on{background:linear-gradient(165deg,#F4F7FF,#E4ECFF);border-color:transparent}
+.pnode .pn{font-size:11px;font-weight:700;letter-spacing:.14em;color:#9AA1B8}
+.pnode b{font-size:30px;font-weight:800;letter-spacing:-.04em;line-height:1.1;margin-top:6px;white-space:nowrap}
+.pnode .pl{font-size:13px;font-weight:650;color:#3A4056}
+.pbar{margin-top:auto;padding-top:14px}
+.pbar i{display:block;height:8px;border-radius:8px;background:linear-gradient(90deg,#6C8CFF,#2D5BFF)}
+.pcon{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;min-width:64px;max-width:76px;text-align:center}
+.parrow{font-size:22px;color:#B6BCD0;line-height:1}
+.pwait{font-size:11.5px;font-weight:650;color:var(--muted);line-height:1.25}
+.pcon.hot .parrow{color:var(--red)}
+.pcon.hot .pwait{color:var(--red);background:var(--red-soft);border-radius:10px;padding:4px 8px}
+.pdef{grid-column:1/-1;display:flex;align-items:center;justify-content:flex-end;gap:10px;font-size:13px;color:var(--muted);font-weight:650}
+.pdef b{font-size:15px;color:var(--red);background:var(--red-soft);padding:3px 12px;border-radius:99px}
+.donutwrap{display:flex;align-items:center;gap:18px;margin-top:14px;flex-wrap:wrap}
+.donut{position:relative;width:148px;height:148px;flex:0 0 148px}
+.donut svg{width:100%;height:100%}
+.dc{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.dc b{font-size:30px;font-weight:800;letter-spacing:-.04em;line-height:1}
+.dc span{font-size:11.5px;color:var(--muted);margin-top:3px;font-weight:600}
+.legendlist{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;flex:1;min-width:140px}
+.legendlist li{display:flex;align-items:center;gap:8px;font-size:13.5px;font-weight:550;color:#3A4056}
+.legendlist li i{width:10px;height:10px;border-radius:4px;flex:0 0 10px}
+.legendlist li b{margin-left:auto}
+.trend{width:100%;height:auto;display:block;margin-top:10px}
+.tlegend{display:flex;gap:18px;flex-wrap:wrap;font-size:12.5px;font-weight:600;color:var(--muted);margin-top:6px}
+.tlegend span::before{content:"";display:inline-block;width:18px;height:3px;border-radius:3px;margin-right:7px;vertical-align:3px;background:var(--blue)}
+.tlegend .p::before{background:repeating-linear-gradient(90deg,#B3BAD0 0 5px,transparent 5px 9px)}
+.hbars{display:flex;flex-direction:column;gap:16px;margin-top:16px}
+.hbl{display:flex;justify-content:space-between;gap:10px;font-size:13.5px;font-weight:600;margin-bottom:6px}
+.hbt{height:12px;border-radius:12px;background:#EEF1F8;overflow:hidden}
+.hbt i{display:block;height:100%;border-radius:12px}
+.kpi3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.g32{display:grid;grid-template-columns:3fr 2fr;gap:16px}
+.fld{display:flex;flex-direction:column;gap:5px;min-width:0;flex:1 1 160px}
+.selwrap{position:relative}
+.selbtn{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;min-width:150px;border:1px solid rgba(15,18,32,.10);background:#fff;border-radius:14px;padding:11px 14px;font:inherit;font-size:14px;font-weight:600;color:var(--ink);text-align:left;cursor:pointer;transition:border-color .15s,box-shadow .15s}
+.selbtn:hover{border-color:rgba(45,91,255,.45)}
+.selbtn[aria-expanded=true]{border-color:var(--blue);box-shadow:0 0 0 4px rgba(45,91,255,.12)}
+.selbtn .v{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.selbtn svg{width:16px;height:16px;flex:0 0 16px;stroke:#8A91A8;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;transition:transform .2s}
+.selbtn[aria-expanded=true] svg{transform:rotate(180deg);stroke:var(--blue)}
+.selback{position:fixed;inset:0;z-index:60;background:transparent}
+.selmenu{position:fixed;z-index:61;width:max-content;max-width:min(380px,92vw);max-height:300px;overflow:auto;background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:0 2px 6px rgba(15,18,32,.06),0 30px 60px -20px rgba(15,18,32,.35);padding:6px;list-style:none;margin:0}
+.selmenu li{margin:0}
+.selopt{display:flex;align-items:center;gap:10px;width:100%;border:0;background:transparent;padding:10px 12px;border-radius:12px;font:inherit;font-weight:600;font-size:14px;text-align:left;color:var(--ink);cursor:pointer}
+.selopt:hover{background:var(--soft)}
+.selopt.on{color:var(--blue-deep);background:var(--blue-soft)}
+.selopt .tick{margin-left:auto;width:16px;height:16px;stroke:var(--blue);fill:none;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;flex:0 0 16px}
 .board{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;align-items:start}
 .col{background:rgba(255,255,255,.6);border:1px solid var(--line);border-radius:20px;padding:12px;display:flex;flex-direction:column;gap:10px;min-height:110px}
 .colhead{display:flex;justify-content:space-between;align-items:center;padding:4px 6px}
@@ -182,14 +232,18 @@ button.chip{font:inherit;font-size:12.5px;font-weight:600;cursor:pointer}
 .attn .txt small{display:block;font-weight:500;color:var(--muted);font-size:12.5px}
 .attn .go{color:#B6BCD0;font-size:22px}
 .trow2{display:flex;align-items:center;gap:12px;padding:10px 4px;border-bottom:1px solid var(--line)}
+.trow2 .prog{min-width:0}
 .trow2 .tt{flex:1;min-width:0;font-weight:600;line-height:1.3}
 .chk{width:30px;height:30px;border-radius:10px;border:1.5px solid #C9CFE3;background:#fff;display:grid;place-items:center;padding:0;color:transparent;flex:0 0 30px}
 .chk:hover{border-color:var(--blue);color:var(--blue)}
 .chk svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
-.addrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.addrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;align-items:flex-end}
 .addrow input,.addrow select{border:1px solid var(--line);border-radius:12px;padding:10px 12px;font-size:16px;background:#fff;flex:1 1 160px;min-width:0}
 .who1c{display:flex;align-items:center;gap:10px;font-weight:600}
 @media (max-width:1100px){
+  .pipe{grid-template-columns:1fr auto 1fr auto 1fr}
+  .kpi3{grid-template-columns:1fr 1fr}
+  .g32{grid-template-columns:1fr}
   .board{grid-template-columns:repeat(2,minmax(0,1fr))}
   .g4{grid-template-columns:repeat(2,1fr)} .g3{grid-template-columns:1fr 1fr} .g21{grid-template-columns:1fr}
   .arch{grid-template-columns:1fr} .phonewrap{grid-template-columns:1fr}
@@ -197,6 +251,21 @@ button.chip{font:inherit;font-size:12.5px;font-weight:600;cursor:pointer}
   .step:not(:last-child)::after{display:none}
 }
 @media (max-width:820px){
+  .selback{background:rgba(14,15,20,.38)}
+  .selmenu{left:10px !important;right:10px;top:auto !important;bottom:10px;width:auto;min-width:0 !important;max-width:none;max-height:64vh;border-radius:26px;padding:10px}
+  .selopt{min-height:54px;font-size:16px;padding:12px 14px}
+  .selbtn{min-height:48px;font-size:16px}
+  .pipe{grid-template-columns:1fr;gap:6px}
+  .pcon{flex-direction:row;max-width:none;min-width:0;justify-content:flex-start;gap:10px;padding:0 6px;min-height:28px}
+  .parrow{transform:rotate(90deg)}
+  .pnode{min-height:0;display:grid;grid-template-columns:1fr auto;align-items:center;column-gap:12px;padding:12px 16px}
+  .pnode .pn{display:none}
+  .pnode b{font-size:26px;margin:0;grid-column:1;grid-row:1}
+  .pnode .pl{grid-column:2;grid-row:1}
+  .pbar{grid-column:1/-1;grid-row:2;padding-top:8px}
+  .pdef{justify-content:flex-start}
+  .kpi3{grid-template-columns:1fr}
+  .donutwrap{justify-content:center}
   .board{grid-template-columns:1fr}
   .cardrows thead{display:none}
   .cardrows,.cardrows tbody,.cardrows tr,.cardrows td{display:block;width:100% !important}
@@ -313,7 +382,7 @@ V.tasks=function(){
    '<div class="grid g3"><div class="card"><h3>Открыто</h3><div class="big">'+open.length+'</div><span class="delta gray">у всей команды</span></div>'+
    '<div class="card"><h3>На сегодня</h3><div class="big">'+open.filter(function(t){return t.due==='Сегодня'}).length+'</div><span class="delta gray">срок сегодня</span></div>'+
    '<div class="card"><h3>Просрочено</h3><div class="big">'+over+'</div><span class="delta'+(over?' red':' gray')+'">'+(over?'нужно разобрать':'всё в срок')+'</span></div></div>'+
-   '<div class="card" style="margin-top:16px"><h3>Новая задача</h3><div class="addrow"><input id="taTitle" placeholder="Что нужно сделать"><select id="taWho"><option>Руководитель</option><option>Технолог</option><option>Кладовщик</option></select><button class="btn blue" id="taAdd">Добавить</button></div></div>';
+   '<div class="card" style="margin-top:16px"><h3>Новая задача</h3><div class="addrow"><input id="taTitle" placeholder="Что нужно сделать">'+sel('taWho',[['Руководитель','Руководитель'],['Технолог','Технолог'],['Кладовщик','Кладовщик']],'Руководитель')+'<button class="btn blue" id="taAdd">Добавить</button></div></div>';
   if(TV==='board'){
     out+='<div class="board" style="margin-top:16px">'+ST.map(function(s){
       var col=TASKS.filter(function(t){return t.st===s[0]});
@@ -330,16 +399,54 @@ V.tasks=function(){
   }
   return out;
 };
+function donut(segs,center,sub){
+  var total=segs.reduce(function(s,x){return s+x.v},0), c=2*Math.PI*52, acc=0, arcs='';
+  segs.forEach(function(s){ if(s.v<=0)return; var len=s.v/total*c; arcs+='<circle cx="70" cy="70" r="52" fill="none" stroke="'+s.c+'" stroke-width="16" stroke-dasharray="'+Math.max(0,len-3).toFixed(1)+' '+c.toFixed(1)+'" stroke-dashoffset="'+(-acc).toFixed(1)+'"/>'; acc+=len; });
+  return '<div class="donutwrap"><div class="donut"><svg viewBox="0 0 140 140" aria-hidden="true"><circle cx="70" cy="70" r="52" fill="none" stroke="#EEF1F8" stroke-width="16"/><g transform="rotate(-90 70 70)">'+arcs+'</g></svg><div class="dc"><b>'+center+'</b><span>'+sub+'</span></div></div><ul class="legendlist">'+segs.map(function(s){return '<li><i style="background:'+s.c+'"></i>'+s.l+'<b>'+s.v+'</b></li>'}).join('')+'</ul></div>';
+}
+function trend(cur,prev,labels){
+  var w=640,h=230,pl=8,pr=18,pt=22,pb=30,n=Math.max(cur.length,prev.length,2),mx=Math.max.apply(null,cur.concat(prev).concat([1]));
+  function x(i){return pl+i*(w-pl-pr)/(n-1)} function y(v){return pt+(1-v/mx)*(h-pt-pb)}
+  function path(a){return a.map(function(v,i){return (i?'L':'M')+x(i).toFixed(1)+' '+y(v).toFixed(1)}).join(' ')}
+  var last=cur.length-1, area=path(cur)+' L'+x(last).toFixed(1)+' '+(h-pb)+' L'+x(0).toFixed(1)+' '+(h-pb)+' Z', grid='';
+  [0.25,0.5,0.75,1].forEach(function(g){grid+='<line x1="'+pl+'" x2="'+(w-pr)+'" y1="'+y(mx*g).toFixed(1)+'" y2="'+y(mx*g).toFixed(1)+'" stroke="#E9ECF4"/>'});
+  var lb=labels.map(function(l,i){return (i%3===0||i===labels.length-1)?'<text x="'+x(i).toFixed(1)+'" y="'+(h-8)+'" font-size="12" fill="#8A91A8" text-anchor="middle">'+l+'</text>':''}).join('');
+  return '<svg class="trend" viewBox="0 0 '+w+' '+h+'" role="img" aria-label="Выработка по дням"><defs><linearGradient id="ta" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2D5BFF" stop-opacity=".28"/><stop offset="1" stop-color="#2D5BFF" stop-opacity="0"/></linearGradient></defs>'+grid+
+   '<path d="'+path(prev)+'" fill="none" stroke="#B3BAD0" stroke-width="2" stroke-dasharray="5 5" stroke-linecap="round" stroke-linejoin="round"/><path d="'+area+'" fill="url(#ta)"/><path d="'+path(cur)+'" fill="none" stroke="#2D5BFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><circle cx="'+x(last).toFixed(1)+'" cy="'+y(cur[last]).toFixed(1)+'" r="5.5" fill="#fff" stroke="#2D5BFF" stroke-width="3"/>'+lb+'</svg>';
+}
+function hbars(rows){
+  var mx=Math.max.apply(null,rows.map(function(r){return Math.abs(r.v)}).concat([1]));
+  return '<div class="hbars">'+rows.map(function(r){return '<div><div class="hbl"><span>'+r.l+'</span><b>'+r.t+'</b></div><div class="hbt"><i style="width:'+Math.max(3,Math.abs(r.v)/mx*100).toFixed(1)+'%;background:'+(r.c||'linear-gradient(90deg,#6C8CFF,#2D5BFF)')+'"></i></div></div>'}).join('')+'</div>';
+}
+function pipeline(nodes,waits,defect){
+  var mx=Math.max.apply(null,nodes.map(function(n){return n[1]}).concat([1])), hot=0;
+  waits.forEach(function(w,i){if(w[1]>waits[hot][1])hot=i});
+  var out='<div class="pipe">';
+  nodes.forEach(function(n,i){
+    out+='<div class="pnode on"><span class="pn">0'+(i+1)+'</span><b>'+n[1].toLocaleString('ru-RU')+'</b><span class="pl">'+n[0]+'</span><div class="pbar"><i style="width:'+Math.max(4,n[1]/mx*100).toFixed(1)+'%"></i></div></div>';
+    if(i<nodes.length-1) out+='<div class="pcon'+(i===hot&&waits[i][1]>0?' hot':'')+'"><span class="parrow">→</span><span class="pwait" title="'+waits[i][0]+'">'+(waits[i][1]>0?waits[i][1].toLocaleString('ru-RU')+' ждут':'—')+'</span></div>';
+  });
+  return out+'<div class="pdef"><span>Брак</span><b>'+defect+'</b></div></div>';
+}
 V.overview=function(){
   var me='Руководитель', mine=openOf(me), over=openOf().filter(function(t){return t.over}).length;
-  var att=[[2,'Спорные записи выработки','Нужно решение технолога','pay',1],[over,'Просроченные задачи','Срок прошёл, а задача не закрыта','tasks',1],[3,'Расхождения в партиях','На следующем этапе больше, чем передали','batches',1],[4,'Остатки ниже норматива','Нужно дошить','plan',0],[2,'Материалы ниже минимума','Пора заказывать','mat',0]].filter(function(a){return a[0]>0});
+  var att=[[2,'Спорные записи выработки','Нужно решение технолога','pay',1],[over,'Просроченные задачи','Срок прошёл, а задача не закрыта','tasks',1],[3,'Расхождения в партиях','На следующем этапе больше, чем передали','batches',1],[1,'Остатки ниже норматива','Нужно дошить','plan',0],[2,'Материалы ниже минимума','Пора заказывать','mat',0],[1,'Возвраты ждут решения','На склад или списать','ret',0]].filter(function(a){return a[0]>0});
+  var nodes=[['Раскрой',1050],['Пошив',810],['Глажка',620],['Упаковка',500],['Склад',380]];
+  var waits=[['ждёт пошива',240],['ждёт глажки',190],['ждёт упаковки',120],['ждёт склада',120]];
+  var big=waits.slice().sort(function(a,b){return b[1]-a[1]})[0];
+  var inc=0,exp=PAYROLL; CASH.forEach(function(x){if(x.k==='I')inc+=x.a;else exp+=x.a});
+  var o=openOf();
+  var cur=[5200,7100,4600,5800,6900,5200,5900,5400,6100], prev=[4400,5600,4100,4900,6200,4800,5100,4700,5200,4500,5900,5300,4600,5000,5400];
+  var labels=['25','26','27','28','29','30','31','1','2','3','4','5','6','7','8'];
+  function cnt(s){return o.filter(function(t){return t.st===s}).length}
   return head('<button class="btn blue" data-go="tasks" style="padding:7px 14px">Все задачи</button>')+
    '<div class="grid g4">'+
     '<button class="card tile" data-go="batches" style="text-align:left"><h3>Партии в работе</h3><div class="big">12</div><span class="delta gray">4 на упаковке</span></button>'+
-    '<button class="card tile" data-go="pay" style="text-align:left"><h3>Выработка за период</h3><div class="big">148 320 ₽</div><span class="delta">+12% к прошлому</span></button>'+
-    '<button class="card tile" data-go="stock" style="text-align:left"><h3>Остатки, шт</h3><div class="big">8 450</div><span class="delta gray">по 38 моделям</span></button>'+
+    '<button class="card tile" data-go="pay" style="text-align:left"><h3>Выработка за период</h3><div class="big">148 320 ₽</div><span class="delta">+16% к прошлому</span></button>'+
+    '<button class="card tile" data-go="stock" style="text-align:left"><h3>Остатки, шт</h3><div class="big">8 450</div><span class="delta gray">1 поз. критично</span></button>'+
     '<button class="card tile" data-go="tasks" style="text-align:left"><h3>Просрочено задач</h3><div class="big">'+over+'</div><span class="delta'+(over?' red':' gray')+'">'+(over?'нужно разобрать':'всё в срок')+'</span></button>'+
    '</div>'+
+   '<div class="card" style="margin-top:16px"><div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap"><div><h3>Конвейер цеха</h3><div class="sub">Сколько изделий дошло до каждого этапа. Между этапами видно, что ждёт следующего шага.</div></div><span class="pill red">Больше всего: '+big[0]+' '+big[1]+'</span></div>'+pipeline(nodes,waits,12)+'</div>'+
    '<div class="grid g2" style="margin-top:16px">'+
     '<div class="card"><h3>Мои задачи</h3><div class="sub">Сначала просроченные и ближайшие по сроку</div><div style="margin-top:8px">'+
      (mine.length?mine.slice().sort(function(a,b){return (b.over?1:0)-(a.over?1:0)}).slice(0,6).map(function(t){return '<div class="trow2">'+(t.st!=='REVIEW'?'<button class="chk" data-tdone="'+t.id+'" aria-label="Выполнено"><svg viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg></button>':'<span class="pill blue">проверка</span>')+'<div class="tt">'+t.t+'</div>'+(t.due?'<span class="pill'+(t.over?' red':'')+'">'+t.due+'</span>':'')+'</div>'}).join(''):'<div class="mut" style="padding:14px 4px">На вас задач нет.</div>')+
@@ -347,13 +454,42 @@ V.overview=function(){
     '<div class="card"><h3>Требует внимания</h3><div class="sub">Всё, что просит решения, собрано здесь</div><div class="attn" style="margin-top:8px">'+
      att.map(function(a){return '<button data-go="'+a[3]+'"><span class="cnt'+(a[4]?' red':'')+'">'+a[0]+'</span><span class="txt">'+a[1]+'<small>'+a[2]+'</small></span><span class="go">›</span></button>'}).join('')+'</div></div>'+
    '</div>'+
-   '<div class="grid g21" style="margin-top:16px">'+
-    '<div class="card"><h3>Выработка по дням<span class="demo">пример</span></h3><div class="sub">Сумма начислений по цеху</div>'+bars([['Пн',62],['Вт',74],['Ср',58],['Чт',88],['Пт',100],['Сб',46]],4)+'</div>'+
+   '<div class="kpi3" style="margin-top:16px">'+
+    '<div class="card"><h3>Остатки по нормативам</h3><div class="sub">Позиции модель и размер</div>'+donut([{l:'В норме',v:15,c:'#2D5BFF'},{l:'Мало',v:4,c:'#A9BDFF'},{l:'Критично',v:1,c:'#E5484D'}],'20','позиций')+'</div>'+
+    '<div class="card"><h3>Задачи по статусам</h3><div class="sub">Открытые задачи команды</div>'+donut([{l:'К выполнению',v:cnt('TODO'),c:'#A9BDFF'},{l:'В работе',v:cnt('DOING'),c:'#2D5BFF'},{l:'На проверке',v:cnt('REVIEW'),c:'#0E0F14'}],String(o.length),'открыто')+(over?'<div style="margin-top:12px"><span class="pill red">Просрочено: '+over+'</span></div>':'')+'</div>'+
+    '<div class="card"><h3>Деньги за 30 дней</h3><div class="sub">Зарплата подтягивается из выработки</div>'+hbars([{l:'Доходы',v:inc,t:R(inc)},{l:'Расходы',v:exp,t:R(exp),c:'linear-gradient(90deg,#B8C4E8,#7F93D0)'},{l:'Прибыль',v:inc-exp,t:R(inc-exp),c:'linear-gradient(90deg,#34C38F,#12935F)'}])+'</div>'+
+   '</div>'+
+   '<div class="g32" style="margin-top:16px">'+
+    '<div class="card"><div style="display:flex;justify-content:space-between;align-items:center;gap:12px"><div><h3>Выработка по дням</h3><div class="sub">Текущий период против прошлого, ₽ в день</div></div><span class="pill green">+16% к прошлому</span></div>'+trend(cur,prev,labels)+'<div class="tlegend"><span>Текущий период</span><span class="p">Прошлый период</span></div></div>'+
     '<div class="card"><div style="display:flex;justify-content:space-between;align-items:center"><div><h3>Команда</h3><div class="sub">Открытых задач на человека</div></div><button class="btn line" data-go="tasks" data-tvset="team" style="padding:6px 12px;font-size:12.5px">Нагрузка</button></div><div style="margin-top:6px">'+
-     ['Руководитель','Технолог','Кладовщик'].map(function(n){var o=openOf(n),ov=o.filter(function(t){return t.over}).length;return '<div class="trow2"><div class="who1c" style="flex:1;min-width:0">'+av(n)+'<span style="min-width:0">'+n+'</span></div><div style="width:40px">'+prog(o.length/6*100,ov>0)+'</div><div style="min-width:44px;text-align:right"><b>'+o.length+'</b>'+(ov?'<span class="pill red" style="margin-left:6px">'+ov+'</span>':'')+'</div></div>'}).join('')+'</div></div>'+
+     ['Руководитель','Технолог','Кладовщик'].map(function(n){var q=openOf(n),ov=q.filter(function(t){return t.over}).length;return '<div class="trow2"><div class="who1c" style="flex:1;min-width:0">'+av(n)+'<span style="min-width:0">'+n+'</span></div><div style="width:56px">'+prog(q.length/6*100,ov>0)+'</div><div style="min-width:48px;text-align:right"><b>'+q.length+'</b>'+(ov?'<span class="pill red" style="margin-left:6px">'+ov+'</span>':'')+'</div></div>'}).join('')+'</div></div>'+
    '</div>'+
    '<div class="card" style="margin-top:16px"><h3>Партии в работе</h3><div class="scroll">'+batchTable()+'</div></div>';
 };
+function sel(id,opts,val){
+  var cur=opts.filter(function(o){return o[0]===val})[0]||opts[0];
+  return '<div class="fld"><div class="selwrap"><button type="button" class="selbtn" id="'+id+'" data-sel data-val="'+cur[0]+'" data-opts=\''+JSON.stringify(opts).replace(/'/g,'&#39;')+'\' aria-expanded="false"><span class="v">'+cur[1]+'</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button></div></div>';
+}
+var SELM=null;
+function closeSel(){ if(SELM){SELM.back.remove();SELM.ul.remove();SELM.btn.setAttribute('aria-expanded','false');SELM=null} }
+function openSel(btn){
+  closeSel();
+  var opts=JSON.parse(btn.dataset.opts), cur=btn.dataset.val;
+  var back=document.createElement('div'); back.className='selback';
+  var ul=document.createElement('ul'); ul.className='selmenu'; ul.setAttribute('role','listbox');
+  ul.innerHTML=opts.map(function(o){return '<li><button type="button" class="selopt'+(o[0]===cur?' on':'')+'" data-v="'+o[0]+'"><span>'+o[1]+'</span>'+(o[0]===cur?'<svg class="tick" viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg>':'')+'</button></li>'}).join('');
+  document.body.appendChild(back); document.body.appendChild(ul);
+  var r=btn.getBoundingClientRect();
+  if(window.innerWidth>820){
+    ul.style.minWidth=r.width+'px'; ul.style.left=Math.min(r.left,window.innerWidth-ul.offsetWidth-12)+'px';
+    var h=ul.offsetHeight;
+    ul.style.top=((window.innerHeight-r.bottom<h+16&&r.top>h+16)?(r.top-h-6):(r.bottom+6))+'px';
+  }
+  btn.setAttribute('aria-expanded','true'); SELM={back:back,ul:ul,btn:btn};
+  back.onclick=closeSel;
+  ul.onclick=function(e){var o=e.target.closest('.selopt'); if(!o)return; btn.dataset.val=o.dataset.v; btn.querySelector('.v').textContent=o.querySelector('span').textContent; closeSel()};
+}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeSel()});
 var CASH=[
  {k:'I',c:'Выплата WB',a:214000,d:'Отчёт о реализации'},
  {k:'I',c:'Выплата Ozon',a:86000,d:'Отчёт о реализации'},
@@ -378,7 +514,7 @@ V.fin=function(){
    '<div class="grid g21" style="margin-top:16px">'+
     '<div class="card"><h3>Расходы по категориям</h3><div class="sub">Зарплата подтягивается из выработки автоматически</div><div style="margin-top:8px">'+
      cats.map(function(c){return '<div style="padding:10px 2px;border-bottom:1px solid var(--line)"><div style="display:flex;justify-content:space-between;gap:12px;align-items:baseline"><b style="min-width:0">'+c+'</b><span style="white-space:nowrap">'+R(cat[c])+'</span></div><div style="margin-top:7px">'+prog(cat[c]/mx*100)+'</div></div>'}).join('')+'</div></div>'+
-    '<div class="card"><h3>Записать операцию</h3><div class="addrow"><select id="cfKind"><option value="E">Расход</option><option value="I">Доход</option></select><input id="cfCat" placeholder="Категория"><input id="cfAmt" inputmode="decimal" placeholder="Сумма, ₽"><button class="btn blue" id="cfAdd">Записать</button></div></div>'+
+    '<div class="card"><h3>Записать операцию</h3><div class="addrow">'+sel('cfKind',[['E','Расход'],['I','Доход']],'E')+'<input id="cfCat" placeholder="Категория"><input id="cfAmt" inputmode="decimal" placeholder="Сумма, ₽"><button class="btn blue" id="cfAdd">Записать</button></div></div>'+
    '</div>'+
    '<div class="card" style="margin-top:16px"><h3>Последние операции</h3><div class="scroll"><table class="tbl"><thead><tr><th>Вид</th><th>Категория</th><th>Сумма</th><th>Заметка</th></tr></thead><tbody>'+
     CASH.slice(0,10).map(function(x){return '<tr><td><span class="pill'+(x.k==='I'?' green':'')+'">'+(x.k==='I'?'Доход':'Расход')+'</span></td><td><b>'+x.c+'</b></td><td>'+(x.k==='I'?'+':'−')+R(x.a)+'</td><td class="mut">'+x.d+'</td></tr>'}).join('')+'</tbody></table></div></div>';
@@ -395,7 +531,7 @@ V.ret=function(){
    '<div class="grid g3"><div class="card"><h3>Ждут решения</h3><div class="big">'+RET.filter(function(x){return x.st==='RECEIVED'||x.st==='CHECKED'}).length+'</div><span class="delta gray">на склад или списать</span></div>'+
    '<div class="card"><h3>Вернули на склад</h3><div class="big">+'+BACK+'</div><span class="delta">шт в остатки</span></div>'+
    '<div class="card"><h3>Списано</h3><div class="big">'+RET.filter(function(x){return x.st==='WRITEOFF'}).reduce(function(s,x){return s+x.q},0)+'</div><span class="delta gray">шт</span></div></div>'+
-   '<div class="card" style="margin-top:16px"><h3>Принять возврат</h3><div class="addrow"><select id="rtM"><option>Футболка белая, M</option><option>Футболка графит, L</option><option>Худи графит, M</option><option>Лонгслив молочный, XL</option></select><input id="rtQ" type="number" min="1" value="1"><input id="rtR" placeholder="Причина"><button class="btn blue" id="rtAdd">Принять</button></div></div>'+
+   '<div class="card" style="margin-top:16px"><h3>Принять возврат</h3><div class="addrow">'+sel('rtM',[['Футболка белая, M','Футболка белая, M'],['Футболка графит, L','Футболка графит, L'],['Худи графит, M','Худи графит, M'],['Лонгслив молочный, XL','Лонгслив молочный, XL']],'Футболка белая, M')+'<input id="rtQ" type="number" min="1" value="1"><input id="rtR" placeholder="Причина"><button class="btn blue" id="rtAdd">Принять</button></div></div>'+
    '<div class="card" style="margin-top:16px"><h3>Журнал возвратов</h3><div class="scroll"><table class="tbl"><thead><tr><th>Товар</th><th>Шт</th><th>Причина</th><th>Статус</th><th></th></tr></thead><tbody>'+
     RET.map(function(x){var s=RETST[x.st];return '<tr><td><b>'+x.m+'</b></td><td>'+x.q+'</td><td class="mut">'+x.r+'</td><td><span class="pill '+s[1]+'">'+s[0]+'</span></td><td>'+((x.st==='RESTOCKED'||x.st==='WRITEOFF')?'':'<button class="btn blue" style="padding:7px 12px;font-size:12.5px" data-rres="'+x.id+'|restock">На склад</button> <button class="btn line" style="padding:7px 12px;font-size:12.5px" data-rres="'+x.id+'|writeoff">Списать</button>')+'</td></tr>'}).join('')+'</tbody></table></div></div>';
 };
@@ -586,12 +722,13 @@ function go(k){cur=k;try{history.replaceState(null,'','#'+k)}catch(e){};render()
 function rr(){var y=window.scrollY;document.getElementById('main').innerHTML=V[cur]();enhance();window.scrollTo(0,y)}
 document.addEventListener('click',function(e){
   var rr2=e.target.closest('[data-rres]'); if(rr2){var q=rr2.dataset.rres.split('|');RET.forEach(function(x){if(x.id==q[0]){if(q[1]==='restock'){x.st='RESTOCKED';BACK+=x.q}else x.st='WRITEOFF'}});rr();return}
-  var ra=e.target.closest('#rtAdd'); if(ra){var qn=parseInt(document.getElementById('rtQ').value,10);if(!(qn>0))return;RET.unshift({id:++RID,m:document.getElementById('rtM').value,q:qn,r:document.getElementById('rtR').value||'Без причины',st:'RECEIVED'});rr();return}
-  var cf=e.target.closest('#cfAdd'); if(cf){var am=parseFloat(String(document.getElementById('cfAmt').value).replace(',','.'));var ct=(document.getElementById('cfCat').value||'').trim();if(!(am>0)||ct.length<2){document.getElementById('cfCat').focus();return}CASH.unshift({k:document.getElementById('cfKind').value,c:ct,a:am,d:'Добавлено вручную'});rr();return}
+  var ra=e.target.closest('#rtAdd'); if(ra){var qn=parseInt(document.getElementById('rtQ').value,10);if(!(qn>0))return;RET.unshift({id:++RID,m:document.getElementById('rtM').dataset.val,q:qn,r:document.getElementById('rtR').value||'Без причины',st:'RECEIVED'});rr();return}
+  var cf=e.target.closest('#cfAdd'); if(cf){var am=parseFloat(String(document.getElementById('cfAmt').value).replace(',','.'));var ct=(document.getElementById('cfCat').value||'').trim();if(!(am>0)||ct.length<2){document.getElementById('cfCat').focus();return}CASH.unshift({k:document.getElementById('cfKind').dataset.val,c:ct,a:am,d:'Добавлено вручную'});rr();return}
+  var sb=e.target.closest('[data-sel]'); if(sb){if(sb.getAttribute('aria-expanded')==='true')closeSel();else openSel(sb);return}
   var tv=e.target.closest('[data-tv]'); if(tv){TV=tv.dataset.tv;rr();return}
   var tm=e.target.closest('[data-tmove]'); if(tm){var p=tm.dataset.tmove.split('|');TASKS.forEach(function(x){if(x.id==p[0]){x.st=p[1];if(p[1]==='DONE'){x.over=false;x.due=''}}});rr();return}
   var td=e.target.closest('[data-tdone]'); if(td){TASKS.forEach(function(x){if(x.id==td.dataset.tdone){x.st='DONE';x.over=false;x.due=''}});rr();return}
-  var ta=e.target.closest('#taAdd'); if(ta){var inp=document.getElementById('taTitle');var v=(inp.value||'').trim();if(v.length<2){inp.focus();return}var w=document.getElementById('taWho');TASKS.unshift({id:++TID,t:v,who:w?w.value:'Руководитель',due:'Сегодня',st:'TODO',pr:'NORMAL',area:'Другое'});rr();return}
+  var ta=e.target.closest('#taAdd'); if(ta){var inp=document.getElementById('taTitle');var v=(inp.value||'').trim();if(v.length<2){inp.focus();return}var w=document.getElementById('taWho');TASKS.unshift({id:++TID,t:v,who:w?w.dataset.val:'Руководитель',due:'Сегодня',st:'TODO',pr:'NORMAL',area:'Другое'});rr();return}
   var t=e.target.closest('[data-go]'); if(t){if(t.dataset.tvset)TV=t.dataset.tvset;go(t.dataset.go);return}
   var c=e.target.closest('[data-conf]'); if(c){CONF[c.dataset.conf]=1;var y=window.scrollY;document.getElementById('main').innerHTML=V[cur]();enhance();window.scrollTo(0,y);return}
   var m=e.target.closest('[data-m]'); if(m){document.querySelectorAll('#optM button').forEach(function(b){b.classList.remove('on')});m.classList.add('on');return}
