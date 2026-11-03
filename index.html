@@ -246,6 +246,8 @@ var I={
  tasks:'M5 4h14v16H5zM9 10l2 2 4-4M9 16h6',
  check:'M5 12l5 5 9-10',
  alert:'M12 3l10 18H2zM12 10v5M12 18h.01',
+ undo:'M9 14L4 9l5-5M4 9h10a6 6 0 0 1 0 12h-3',
+ wallet:'M3 7a2 2 0 0 1 2-2h13v4M3 7v11a2 2 0 0 0 2 2h15V9H5a2 2 0 0 1-2-2zM16 14h.01',
  bot:'M12 3v3M6 8h12a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2zM9 13h.01M15 13h.01M9 17h6'
 };
 function ic(n){return '<svg viewBox="0 0 24 24"><path d="'+I[n]+'"/></svg>'}
@@ -254,10 +256,10 @@ var NAV=[
  ['ПЛАТФОРМА',[['overview','Обзор','home'],['tasks','Задачи и команда','tasks'],['arch','Архитектура','layers']]],
  ['ПРОИЗВОДСТВО',[['batches','Партии','box'],['pay','Выработка и зарплата','cash'],['app','Приложение швеи','phone']]],
  ['СКЛАД И ДАННЫЕ',[['stock','Остатки','grid'],['dict','Справочники','book']]],
- ['СЛЕДУЮЩИЙ ЭТАП',[['mat','Материалы','spool','скоро'],['mp','Площадки','store','скоро'],['plan','Планирование','cal','скоро']]],
+ ['СЛЕДУЮЩИЙ ЭТАП',[['mat','Материалы','spool','скоро'],['mp','Площадки','store','скоро'],['plan','Планирование','cal','скоро'],['ret','Возвраты','undo','скоро'],['fin','Финансы','wallet','скоро']]],
  ['АГЕНТЫ',[['agents','Агенты','bot']]]
 ];
-var TITLES={overview:['Обзор','Платформа / Обзор'],tasks:['Задачи','Платформа / Задачи и команда'],arch:['Архитектура платформы','Платформа / Архитектура'],batches:['Партии','Производство / Партии'],pay:['Выработка и зарплата','Производство / Зарплата'],app:['Приложение швеи','Производство / Телефон швеи'],stock:['Остатки','Склад / Остатки'],dict:['Справочники','Данные / Справочники'],mat:['Материалы','Следующий этап / Материалы'],mp:['Площадки','Следующий этап / Wildberries и Ozon'],plan:['Планирование','Следующий этап / Планирование'],agents:['Агенты','Агенты / Команда']};
+var TITLES={overview:['Обзор','Платформа / Обзор'],tasks:['Задачи','Платформа / Задачи и команда'],ret:['Возвраты','Следующий этап / Возвраты'],fin:['Финансы','Следующий этап / Доходы и расходы'],arch:['Архитектура платформы','Платформа / Архитектура'],batches:['Партии','Производство / Партии'],pay:['Выработка и зарплата','Производство / Зарплата'],app:['Приложение швеи','Производство / Телефон швеи'],stock:['Остатки','Склад / Остатки'],dict:['Справочники','Данные / Справочники'],mat:['Материалы','Следующий этап / Материалы'],mp:['Площадки','Следующий этап / Wildberries и Ozon'],plan:['Планирование','Следующий этап / Планирование'],agents:['Агенты','Агенты / Команда']};
 
 var cur='overview';
 function side(){
@@ -351,6 +353,51 @@ V.overview=function(){
      ['Руководитель','Технолог','Кладовщик'].map(function(n){var o=openOf(n),ov=o.filter(function(t){return t.over}).length;return '<div class="trow2"><div class="who1c" style="flex:1;min-width:0">'+av(n)+'<span style="min-width:0">'+n+'</span></div><div style="width:40px">'+prog(o.length/6*100,ov>0)+'</div><div style="min-width:44px;text-align:right"><b>'+o.length+'</b>'+(ov?'<span class="pill red" style="margin-left:6px">'+ov+'</span>':'')+'</div></div>'}).join('')+'</div></div>'+
    '</div>'+
    '<div class="card" style="margin-top:16px"><h3>Партии в работе</h3><div class="scroll">'+batchTable()+'</div></div>';
+};
+var CASH=[
+ {k:'I',c:'Выплата WB',a:214000,d:'Отчёт о реализации'},
+ {k:'I',c:'Выплата Ozon',a:86000,d:'Отчёт о реализации'},
+ {k:'I',c:'Клиентский пошив',a:38000,d:'Заказ клиента П-017'},
+ {k:'E',c:'Материалы',a:64000,d:'Ткань, нитки'},
+ {k:'E',c:'Аренда',a:45000,d:'Помещение цеха'},
+ {k:'E',c:'Реклама',a:31000,d:'Кампании WB'},
+ {k:'E',c:'Логистика',a:18000,d:'Доставка на склады'}
+];
+var PAYROLL=51828;
+function R(n){return Math.round(n).toLocaleString('ru-RU')+' ₽'}
+V.fin=function(){
+  var inc=0,exp=PAYROLL,cat={'Зарплата (из платформы)':PAYROLL};
+  CASH.forEach(function(x){if(x.k==='I')inc+=x.a;else{exp+=x.a;cat[x.c]=(cat[x.c]||0)+x.a}});
+  var profit=inc-exp, cats=Object.keys(cat).sort(function(a,b){return cat[b]-cat[a]}), mx=Math.max.apply(null,cats.map(function(c){return cat[c]}));
+  return head('<span class="chip">Каркас</span>')+
+   '<div class="grid g3">'+
+    '<div class="card"><h3>Доходы</h3><div class="big">'+R(inc)+'</div><span class="delta">выплаты и заказы</span></div>'+
+    '<div class="card"><h3>Расходы</h3><div class="big">'+R(exp)+'</div><span class="delta gray">вместе с зарплатой</span></div>'+
+    '<div class="card"><h3>Прибыль</h3><div class="big">'+R(profit)+'</div><span class="delta'+(profit<0?' red':'')+'">'+(profit<0?'убыток':'до налогов')+'</span></div>'+
+   '</div>'+
+   '<div class="grid g21" style="margin-top:16px">'+
+    '<div class="card"><h3>Расходы по категориям</h3><div class="sub">Зарплата подтягивается из выработки автоматически</div><table class="tbl"><tbody>'+
+     cats.map(function(c){return '<tr><td style="padding:12px 6px"><b>'+c+'</b></td><td style="width:38%">'+prog(cat[c]/mx*100)+'</td><td style="text-align:right;white-space:nowrap;padding:12px 6px">'+R(cat[c])+'</td></tr>'}).join('')+'</tbody></table></div>'+
+    '<div class="card"><h3>Записать операцию</h3><div class="addrow"><select id="cfKind"><option value="E">Расход</option><option value="I">Доход</option></select><input id="cfCat" placeholder="Категория"><input id="cfAmt" inputmode="decimal" placeholder="Сумма, ₽"><button class="btn blue" id="cfAdd">Записать</button></div></div>'+
+   '</div>'+
+   '<div class="card" style="margin-top:16px"><h3>Последние операции</h3><div class="scroll"><table class="tbl"><thead><tr><th>Вид</th><th>Категория</th><th>Сумма</th><th>Заметка</th></tr></thead><tbody>'+
+    CASH.slice(0,10).map(function(x){return '<tr><td><span class="pill'+(x.k==='I'?' green':'')+'">'+(x.k==='I'?'Доход':'Расход')+'</span></td><td><b>'+x.c+'</b></td><td>'+(x.k==='I'?'+':'−')+R(x.a)+'</td><td class="mut">'+x.d+'</td></tr>'}).join('')+'</tbody></table></div></div>';
+};
+var RET=[
+ {id:1,m:'Футболка белая, M',q:3,r:'Не подошёл размер',st:'CHECKED'},
+ {id:2,m:'Лонгслив молочный, XL',q:1,r:'Брак шва',st:'WRITEOFF'},
+ {id:3,m:'Футболка белая, M',q:2,r:'Не подошёл размер',st:'RECEIVED'}
+], RID=10, BACK=0;
+var RETST={RECEIVED:['Принят',''],CHECKED:['Проверен','blue'],RESTOCKED:['Вернули на склад','green'],WRITEOFF:['Списан','red']};
+V.ret=function(){
+  return head('<span class="chip">Каркас</span>')+
+   '<div class="note">Возврат на склад создаёт движение склада и сразу меняет остаток. Списание остаток не меняет и записывается в журнал.</div>'+
+   '<div class="grid g3"><div class="card"><h3>Ждут решения</h3><div class="big">'+RET.filter(function(x){return x.st==='RECEIVED'||x.st==='CHECKED'}).length+'</div><span class="delta gray">на склад или списать</span></div>'+
+   '<div class="card"><h3>Вернули на склад</h3><div class="big">+'+BACK+'</div><span class="delta">шт в остатки</span></div>'+
+   '<div class="card"><h3>Списано</h3><div class="big">'+RET.filter(function(x){return x.st==='WRITEOFF'}).reduce(function(s,x){return s+x.q},0)+'</div><span class="delta gray">шт</span></div></div>'+
+   '<div class="card" style="margin-top:16px"><h3>Принять возврат</h3><div class="addrow"><select id="rtM"><option>Футболка белая, M</option><option>Футболка графит, L</option><option>Худи графит, M</option><option>Лонгслив молочный, XL</option></select><input id="rtQ" type="number" min="1" value="1"><input id="rtR" placeholder="Причина"><button class="btn blue" id="rtAdd">Принять</button></div></div>'+
+   '<div class="card" style="margin-top:16px"><h3>Журнал возвратов</h3><div class="scroll"><table class="tbl"><thead><tr><th>Товар</th><th>Шт</th><th>Причина</th><th>Статус</th><th></th></tr></thead><tbody>'+
+    RET.map(function(x){var s=RETST[x.st];return '<tr><td><b>'+x.m+'</b></td><td>'+x.q+'</td><td class="mut">'+x.r+'</td><td><span class="pill '+s[1]+'">'+s[0]+'</span></td><td>'+((x.st==='RESTOCKED'||x.st==='WRITEOFF')?'':'<button class="btn blue" style="padding:7px 12px;font-size:12.5px" data-rres="'+x.id+'|restock">На склад</button> <button class="btn line" style="padding:7px 12px;font-size:12.5px" data-rres="'+x.id+'|writeoff">Списать</button>')+'</td></tr>'}).join('')+'</tbody></table></div></div>';
 };
 var B=[
  ['П-014','Футболка базовая, белый','300','300','240','180','120',6],
@@ -501,6 +548,8 @@ V.arch=function(){
     mod('mat','Материалы','нормы и закупка',0,'06')+
     mod('plan','Планирование','нормативы и мощность',0,'07')+
     mod('mp','Площадки','WB, Ozon, поставки',0,'08')+
+    mod('ret','Возвраты','приёмка и решение',0,'10')+
+    mod('fin','Финансы','доходы и расходы',0,'11')+
    '</div></div>'+
   '</div>'+
   '<div class="zone"><h4>Агенты</h4>'+['Руководитель','Контролёр','Снабженец','Аналитик','Поставки и склады','Остальные агенты'].map(function(x,i){return '<button class="mod '+(i<2?'now':'later')+'" data-go="agents">'+x+'</button>'}).join('')+'</div>'+
@@ -536,6 +585,9 @@ function render(){
 function go(k){cur=k;try{history.replaceState(null,'','#'+k)}catch(e){};render()}
 function rr(){var y=window.scrollY;document.getElementById('main').innerHTML=V[cur]();enhance();window.scrollTo(0,y)}
 document.addEventListener('click',function(e){
+  var rr2=e.target.closest('[data-rres]'); if(rr2){var q=rr2.dataset.rres.split('|');RET.forEach(function(x){if(x.id==q[0]){if(q[1]==='restock'){x.st='RESTOCKED';BACK+=x.q}else x.st='WRITEOFF'}});rr();return}
+  var ra=e.target.closest('#rtAdd'); if(ra){var qn=parseInt(document.getElementById('rtQ').value,10);if(!(qn>0))return;RET.unshift({id:++RID,m:document.getElementById('rtM').value,q:qn,r:document.getElementById('rtR').value||'Без причины',st:'RECEIVED'});rr();return}
+  var cf=e.target.closest('#cfAdd'); if(cf){var am=parseFloat(String(document.getElementById('cfAmt').value).replace(',','.'));var ct=(document.getElementById('cfCat').value||'').trim();if(!(am>0)||ct.length<2){document.getElementById('cfCat').focus();return}CASH.unshift({k:document.getElementById('cfKind').value,c:ct,a:am,d:'Добавлено вручную'});rr();return}
   var tv=e.target.closest('[data-tv]'); if(tv){TV=tv.dataset.tv;rr();return}
   var tm=e.target.closest('[data-tmove]'); if(tm){var p=tm.dataset.tmove.split('|');TASKS.forEach(function(x){if(x.id==p[0]){x.st=p[1];if(p[1]==='DONE'){x.over=false;x.due=''}}});rr();return}
   var td=e.target.closest('[data-tdone]'); if(td){TASKS.forEach(function(x){if(x.id==td.dataset.tdone){x.st='DONE';x.over=false;x.due=''}});rr();return}
