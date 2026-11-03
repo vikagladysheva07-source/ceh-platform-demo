@@ -449,6 +449,8 @@ html[data-size="large"]{zoom:1.14}html[data-motion="off"] *{animation:none!impor
 .addcard{display:flex;flex-direction:column;gap:8px}
 .addcard textarea{width:100%;resize:none;border-radius:14px;border:1px solid var(--blue);background:var(--solid);color:var(--ink);font:inherit;font-size:16px;padding:10px 12px;outline:none;box-shadow:0 0 0 3px var(--blue-soft)}
 .addcard .row{display:flex;gap:8px}
+.docnew .card{align-items:flex-start}
+@media(max-width:820px){.docnew{grid-template-columns:1fr 1fr!important;gap:10px}.docnew .card{padding:14px}.docnew .sub{display:none}}
 .linkb{border:0;background:transparent;color:var(--ink);font:inherit;padding:0;cursor:pointer;text-align:left}
 .newdoc{display:flex;flex-direction:column;gap:6px;text-align:left;font:inherit;color:inherit;cursor:pointer}
 .newdoc .plus{width:34px;height:34px;border-radius:12px;display:grid;place-items:center;font-size:20px;color:#fff;background:linear-gradient(180deg,#6C9BFF,#3F6FF5)}
@@ -865,7 +867,7 @@ V.docs=function(){
  }
  var list=DOCS.filter(function(d){return !DF||d.t===DF||(DF==='DRAFT'&&d.st==='DRAFT')});
  return head('<button class="chip" data-go="stock">Остатки</button>')+
-  '<div class="grid g4">'+Object.keys(DT).map(function(k){return '<button class="card newdoc" data-dnew="'+k+'"><div class="plus">+</div><h3>'+DT[k][0]+'</h3><div class="sub">'+DT[k][2].split('.')[0]+'.</div></button>'}).join('')+'</div>'+
+  '<div class="grid g4 docnew">'+Object.keys(DT).map(function(k){return '<button class="card newdoc" data-dnew="'+k+'"><div class="plus">+</div><h3>'+DT[k][0]+'</h3><div class="sub">'+DT[k][2].split('.')[0]+'.</div></button>'}).join('')+'</div>'+
   '<div class="chips" style="margin-top:16px"><button class="chip'+(!DF?' dark':'')+'" data-dfilter="">Все</button>'+Object.keys(DT).map(function(k){return '<button class="chip'+(DF===k?' dark':'')+'" data-dfilter="'+k+'">'+DT[k][1]+'</button>'}).join('')+'<button class="chip'+(DF==='DRAFT'?' dark':'')+'" data-dfilter="DRAFT">Черновики</button></div>'+
   '<div class="card" style="margin-top:16px"><div class="scroll"><table class="tbl"><thead><tr><th>Документ</th><th>Тип</th><th>Штук</th><th>Статус</th><th>Автор</th></tr></thead><tbody>'+
   list.map(function(d){return '<tr><td><button class="linkb" data-dopen="'+d.id+'"><b>'+d.n+'</b></button><div class="mut" style="font-size:12px">'+d.note+'</div></td><td>'+DT[d.t][0]+'</td><td>'+docSum(d)+'</td><td><span class="pill '+(d.st==='POSTED'?'green':'blue')+'">'+(d.st==='POSTED'?'Проведён':'Черновик')+'</span></td><td>'+d.who+'<div class="mut" style="font-size:12px">'+d.d+'</div></td></tr>'}).join('')+(list.length?'':'<tr><td colspan="5" class="mut">Документов нет.</td></tr>')+'</tbody></table></div></div>';
