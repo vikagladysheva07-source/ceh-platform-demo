@@ -58,7 +58,7 @@ button{font:inherit;color:inherit;cursor:pointer}
 .top{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:22px}
 .top h1{margin:0;font-size:28px;font-weight:800;letter-spacing:-.02em;line-height:1.15}
 .crumb{color:var(--muted);font-size:13px;margin-top:4px}
-.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chips{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
 .chip{font-size:12.5px;font-weight:600;padding:7px 13px;border-radius:99px;background:var(--card);border:1px solid var(--line);color:#3a3f50}
 .chip.blue{background:var(--blue-soft);border-color:transparent;color:var(--blue-deep)}
 .chip.dark{background:var(--black);color:#fff;border-color:transparent}
@@ -451,6 +451,10 @@ html[data-size="large"]{zoom:1.14}html[data-motion="off"] *{animation:none!impor
 .addcard .row{display:flex;gap:8px}
 .docnew .card{align-items:flex-start}
 @media(max-width:820px){.docnew{grid-template-columns:1fr 1fr!important;gap:10px}.docnew .card{padding:14px}.docnew .sub{display:none}.docnew h3{font-size:14px;margin:0}}
+.g4{gap:14px}
+@media(max-width:820px){.g4{grid-template-columns:1fr 1fr!important;gap:10px}.g4>.card{padding:14px;min-width:0}.g4 .big{font-size:24px}.g4 h3{font-size:13px}.g4 .delta{white-space:normal}}
+.attn.wide{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:28px}
+@media(max-width:820px){.attn.wide{grid-template-columns:1fr}.board{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;padding-bottom:8px}.board .col{flex:0 0 84%;scroll-snap-align:start;min-width:0}}
 .linkb{border:0;background:transparent;color:var(--ink);font:inherit;padding:0;cursor:pointer;text-align:left}
 .newdoc{display:flex;flex-direction:column;gap:6px;text-align:left;font:inherit;color:inherit;cursor:pointer}
 .newdoc .plus{width:34px;height:34px;border-radius:12px;display:grid;place-items:center;font-size:20px;color:#fff;background:linear-gradient(180deg,#6C9BFF,#3F6FF5)}
@@ -556,6 +560,13 @@ function taskCard(t){
    '<div class="tfoot"><div class="tbadges">'+(t.due?'<span class="tb'+(t.over?' red':'')+'">'+t.due+'</span>':'')+(ck?'<span class="tb'+(ck[0]===ck[1]?' ok':'')+'">✓ '+ck[0]+'/'+ck[1]+'</span>':'')+(t.cm?'<span class="tb">💬 '+t.cm+'</span>':'')+'</div>'+
    '<div class="tright"><button class="tmove" data-tmenu="'+t.id+'" aria-label="Переместить">⇄</button>'+av(t.who)+'</div></div>'+menu+'</div>';
 }
+function boardHtml(who,mt){
+  return '<div class="board"'+(mt?' style="margin-top:16px"':'')+'>'+ST.map(function(c){
+    var col=TASKS.filter(function(t){return t.st===c[0]&&(!who||t.who===who)});
+    return '<div class="col" data-col="'+c[0]+'"><div class="colhead"><b>'+c[1]+'</b><span class="pill">'+col.length+'</span></div>'+col.map(taskCard).join('')+(col.length||ADDCOL===c[0]?'':'<div class="colempty">Перетащите карточку сюда</div>')+
+     (ADDCOL===c[0]?'<div class="addcard"><textarea id="acTitle" rows="2" maxlength="140" placeholder="Название карточки"></textarea><div class="row"><button class="btn blue" data-addok="'+c[0]+'">Добавить</button><button class="btn line" data-addcancel="1">Отмена</button></div></div>':'<button class="addbtn" data-addcol="'+c[0]+'">+ Добавить карточку</button>')+'</div>';
+  }).join('')+'</div>';
+}
 function openOf(who){return TASKS.filter(function(t){return t.st!=='DONE'&&(!who||t.who===who)})}
 V.tasks=function(){
   var chips=['board','list','team'].map(function(k){return '<button class="chip'+(TV===k?' dark':'')+'" data-tv="'+k+'">'+({board:'Доска',list:'Список',team:'Команда'})[k]+'</button>'}).join('');
@@ -566,11 +577,7 @@ V.tasks=function(){
    '<div class="card"><h3>Просрочено</h3><div class="big">'+over+'</div><span class="delta'+(over?' red':' gray')+'">'+(over?'нужно разобрать':'всё в срок')+'</span></div></div>'+
    '<div class="card" style="margin-top:16px"><h3>Новая задача</h3><div class="addrow"><input id="taTitle" placeholder="Что нужно сделать">'+sel('taWho',[['Руководитель','Руководитель'],['Технолог','Технолог'],['Кладовщик','Кладовщик']],'Руководитель')+'<button class="btn blue" id="taAdd">Добавить</button></div><div class="sub" style="margin-top:8px">Или добавьте карточку прямо в колонке на доске.</div></div>';
   if(TV==='board'){
-    out+='<div class="board" style="margin-top:16px">'+ST.map(function(c){
-      var col=TASKS.filter(function(t){return t.st===c[0]});
-      return '<div class="col" data-col="'+c[0]+'"><div class="colhead"><b>'+c[1]+'</b><span class="pill">'+col.length+'</span></div>'+col.map(taskCard).join('')+(col.length&&ADDCOL!==c[0]?'':(ADDCOL===c[0]?'':'<div class="colempty">Перетащите карточку сюда</div>'))+
-       (ADDCOL===c[0]?'<div class="addcard"><textarea id="acTitle" rows="2" maxlength="140" placeholder="Название карточки"></textarea><div class="row"><button class="btn blue" data-addok="'+c[0]+'">Добавить</button><button class="btn line" data-addcancel="1">Отмена</button></div></div>':'<button class="addbtn" data-addcol="'+c[0]+'">+ Добавить карточку</button>')+'</div>';
-    }).join('')+'</div>';
+    out+=boardHtml(null,true);
   } else if(TV==='list'){
     out+='<div class="card" style="margin-top:16px"><div class="scroll"><table class="tbl"><thead><tr><th>Задача</th><th>Исполнитель</th><th>Срок</th><th>Статус</th></tr></thead><tbody>'+
      TASKS.slice().sort(function(a,b){return (a.st==='DONE')-(b.st==='DONE')}).map(function(t){return '<tr><td><b>'+t.t+'</b></td><td>'+t.who+'</td><td>'+(t.due?'<span class="pill'+(t.over?' red':'')+'">'+t.due+'</span>':'—')+'</td><td><span class="pill blue">'+ST.filter(function(s){return s[0]===t.st})[0][1]+'</span></td></tr>'}).join('')+'</tbody></table></div></div>';
@@ -629,14 +636,10 @@ V.overview=function(){
     '<button class="card tile" data-go="stock" style="text-align:left"><h3>Остатки, шт</h3><div class="big">8 450</div><span class="delta gray">1 поз. критично</span></button>'+
     '<button class="card tile" data-go="tasks" style="text-align:left"><h3>Просрочено задач</h3><div class="big">'+over+'</div><span class="delta'+(over?' red':' gray')+'">'+(over?'нужно разобрать':'всё в срок')+'</span></button>'+
    '</div>'+
+   '<div class="card" style="margin-top:16px"><div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap"><div><h3>Мои задачи</h3><div class="sub">Доска как в Trello: перетащите карточку в другую колонку или добавьте новую</div></div><div class="chips">'+(mine.filter(function(t){return t.over}).length?'<span class="pill red">Просрочено: '+mine.filter(function(t){return t.over}).length+'</span>':'')+'<button class="btn line" data-go="tasks" style="padding:7px 14px">Вся команда</button></div></div><div style="margin-top:14px">'+boardHtml('Руководитель',false)+'</div></div>'+
    '<div class="card" style="margin-top:16px"><div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap"><div><h3>Конвейер цеха</h3><div class="sub">Сколько изделий дошло до каждого этапа. Между этапами видно, что ждёт следующего шага.</div></div><span class="pill red">Больше всего: '+big[0]+' '+big[1]+'</span></div>'+pipeline(nodes,waits,12)+'</div>'+
-   '<div class="grid g2" style="margin-top:16px">'+
-    '<div class="card"><h3>Мои задачи</h3><div class="sub">Сначала просроченные и ближайшие по сроку</div><div style="margin-top:8px">'+
-     (mine.length?mine.slice().sort(function(a,b){return (b.over?1:0)-(a.over?1:0)}).slice(0,6).map(function(t){return '<div class="trow2">'+(t.st!=='REVIEW'?'<button class="chk" data-tdone="'+t.id+'" aria-label="Выполнено"><svg viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg></button>':'<span class="pill blue">проверка</span>')+'<div class="tt">'+t.t+'</div>'+(t.due?'<span class="pill'+(t.over?' red':'')+'">'+t.due+'</span>':'')+'</div>'}).join(''):'<div class="mut" style="padding:14px 4px">На вас задач нет.</div>')+
-     '</div><div class="addrow"><input id="taTitle" placeholder="Что нужно сделать"><button class="btn blue" id="taAdd">Добавить</button></div></div>'+
-    '<div class="card"><h3>Требует внимания</h3><div class="sub">Всё, что просит решения, собрано здесь</div><div class="attn" style="margin-top:8px">'+
+   '<div class="card" style="margin-top:16px"><h3>Требует внимания</h3><div class="sub">Всё, что просит решения, собрано здесь</div><div class="attn wide" style="margin-top:8px">'+
      att.map(function(a){return '<button data-go="'+a[3]+'"><span class="cnt'+(a[4]?' red':'')+'">'+a[0]+'</span><span class="txt">'+a[1]+'<small>'+a[2]+'</small></span><span class="go">›</span></button>'}).join('')+'</div></div>'+
-   '</div>'+
    '<div class="kpi3" style="margin-top:16px">'+
     '<div class="card"><h3>Остатки по нормативам</h3><div class="sub">Позиции модель и размер</div>'+donut([{l:'В норме',v:15,c:'var(--c-blue)'},{l:'Мало',v:4,c:'var(--c-cyan)'},{l:'Критично',v:1,c:'var(--c-red)'}],'20','позиций')+'</div>'+
     '<div class="card"><h3>Задачи по статусам</h3><div class="sub">Открытые задачи команды</div>'+donut([{l:'К выполнению',v:cnt('TODO'),c:'var(--c-cyan)'},{l:'В работе',v:cnt('DOING'),c:'var(--c-blue)'},{l:'На проверке',v:cnt('REVIEW'),c:'var(--c-ink)'}],String(o.length),'открыто')+(over?'<div style="margin-top:12px"><span class="pill red">Просрочено: '+over+'</span></div>':'')+'</div>'+
