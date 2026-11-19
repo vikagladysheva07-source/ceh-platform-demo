@@ -3,7 +3,7 @@
 :root{--bg:#0A0B10;--ink:#EEF0F7;--mut:#8D93A8;--line:rgba(255,255,255,.09);--card:rgba(255,255,255,.045);--blue:#5B8CFF;--green:#4ADE9B;--red:#FF6B6F;--amber:#F2C265}
 *{box-sizing:border-box}html{scroll-behavior:smooth}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
-.wrap{max-width:1160px;margin:0 auto;padding:0 20px 80px}
+.wrap{max-width:1160px;margin:0 auto;padding:0 20px 120px}
 header.hero{padding:56px 0 28px}
 .kick{color:var(--blue);font-size:13px;letter-spacing:.02em;margin-bottom:10px}
 h1{font-size:40px;line-height:1.1;margin:0 0 14px;font-weight:700;letter-spacing:-.02em}
@@ -14,11 +14,7 @@ h1{font-size:40px;line-height:1.1;margin:0 0 14px;font-weight:700;letter-spacing
 .flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:10px 0 4px;font-size:14px}
 .flow i{font-style:normal;color:var(--mut)}.flow span{border:1px solid var(--line);border-radius:999px;padding:5px 12px;background:var(--card)}
 .card.first{margin-top:22px}details.acc{margin-top:10px;padding:0}details.acc>summary{list-style:none;cursor:pointer;padding:14px 18px;font-weight:600;display:flex;justify-content:space-between;align-items:center}details.acc>summary::-webkit-details-marker{display:none}details.acc>summary::after{content:"+";color:var(--mut);font-size:20px;line-height:1}details.acc[open]>summary::after{content:"–"}details.acc[open]>summary{border-bottom:1px solid var(--line)}details.acc>ol,details.acc>ul,details.acc>table,details.acc>div{margin:12px 18px 16px}details.acc>ol,details.acc>ul{padding-left:22px}details.acc .flow{margin:12px 18px 0}details.acc>p{margin:8px 18px 12px}header.hero{padding:34px 0 14px}.toc{margin:18px 0 8px}section{margin:34px 0}ul.pts,ol.pts{margin:8px 0 0;padding-left:20px;color:var(--ink);font-size:14.5px}ul.pts li,ol.pts li{margin:5px 0}table{width:100%;border-collapse:collapse;font-size:14px}td{padding:9px 10px;border-top:1px solid var(--line);vertical-align:top}td:first-child{width:32%;color:var(--ink)}td+td{color:var(--mut)}
-.bar{position:sticky;top:0;z-index:20;background:rgba(10,11,16,.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-.bar .in{max-width:1160px;margin:0 auto;padding:10px 20px;display:flex;gap:14px;align-items:center;flex-wrap:wrap;font-size:13px}
-.bar .cnt{display:flex;gap:12px;color:var(--mut)}.bar .cnt b{color:var(--ink)}
-.bar .sp{flex:1}
-.btn{font:inherit;color:var(--ink);background:var(--card);border:1px solid rgba(255,255,255,.16);border-radius:12px;padding:8px 14px;cursor:pointer;box-shadow:inset 0 1px 0 rgba(255,255,255,.08)}
+.bar{position:fixed;left:50%;bottom:16px;transform:translateX(-50%);z-index:30;display:flex;gap:16px;align-items:center;background:rgba(18,20,28,.94);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.14);border-radius:16px;padding:8px 8px 8px 18px;font-size:13px;color:var(--mut);box-shadow:0 12px 34px rgba(0,0,0,.45)}#toast{position:fixed;left:50%;bottom:78px;transform:translateX(-50%);z-index:31;max-width:min(92vw,520px);background:rgba(18,20,28,.96);border:1px solid rgba(255,255,255,.16);border-radius:14px;padding:10px 16px;font-size:14px;display:none;text-align:center}.cnt2{margin-top:14px;color:var(--mut);font-size:14px}.cnt2 b{color:var(--ink)}@media (max-width:600px){.bar{left:12px;right:12px;transform:none;justify-content:space-between}}.btn{font:inherit;color:var(--ink);background:var(--card);border:1px solid rgba(255,255,255,.16);border-radius:12px;padding:8px 14px;cursor:pointer;box-shadow:inset 0 1px 0 rgba(255,255,255,.08)}
 .btn:hover{border-color:rgba(91,140,255,.6)}.btn.pri{border-color:rgba(91,140,255,.65);box-shadow:0 0 0 1px rgba(91,140,255,.15),inset 0 1px 0 rgba(255,255,255,.1)}.sendbox{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:14px}.sendbox input{background:rgba(255,255,255,.04);color:var(--ink);border:1px solid var(--line);border-radius:12px;padding:9px 12px;font:inherit;min-width:220px}#stat{color:var(--mut);font-size:14px;margin-top:10px}
 .toc{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 30px}.toc a{color:var(--ink);text-decoration:none;font-size:13px;border:1px solid var(--line);border-radius:999px;padding:6px 12px;background:var(--card)}.toc a:hover{border-color:rgba(91,140,255,.6)}
 section{margin:44px 0;scroll-margin-top:70px}
@@ -46,14 +42,14 @@ figcaption{color:var(--mut);font-size:12px;margin-top:6px}
 .it[data-s=chg] .cm,.it[data-s=no] .cm,.it.hascm .cm,.it.hasq .cm{display:block}
 .end{margin-top:40px}.end h2{margin-top:0}pre{white-space:pre-wrap;background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:14px;padding:14px;font:13px/1.55 ui-monospace,Menlo,monospace;color:#cfd5ea;max-height:420px;overflow:auto}
 @media (max-width:900px){h1{font-size:30px}.how{grid-template-columns:1fr}.body{grid-template-columns:1fr}.figs{position:static;order:-1}.fig.mob{max-width:100%}.figs:has(.mob){grid-template-columns:repeat(2,1fr)}}
-@media print{details.acc>*{display:block}
+@media print{#toast{display:none!important}details.acc>*{display:block}
   :root{--bg:#fff;--ink:#111;--mut:#555;--line:#ccc;--card:#fff}
   body{background:#fff}.bar,.toc,.vote,.btn{display:none!important}.figs{position:static}.it{break-inside:avoid;box-shadow:none!important}
   .it::after{content:"Решение: ____________   Комментарий: ______________________";display:block;margin-top:10px;font-size:12px;color:#555}
   .cm{display:none!important}section{break-inside:auto}
 }
 </style></head><body>
-<div class="bar"><div class="in"><b>Платформа цеха</b><span class="cnt"><span>Подходит <b id="c-ok">0</b></span><span>Изменить <b id="c-chg">0</b></span><span>Не нужно <b id="c-no">0</b></span><span>Не отмечено <b id="c-left">43</b></span></span><span class="sp"></span><button class="btn pri" id="send">Отправить результаты</button><button class="btn" id="copy">Скопировать итог</button><button class="btn" id="reset">Сбросить</button></div></div>
+<div class="bar"><span id="prog">Отмечено 0 из 43</span><button class="btn pri" id="send">Отправить результаты</button></div><div id="toast" role="status"></div>
 <div class="wrap">
 <header class="hero"><div class="kick">Для обсуждения на созвоне</div><h1>Платформа цеха: что в ней есть и как это работает</h1>
 <p class="sub">Ниже все разделы платформы простыми словами: что делает, как работает, зачем нужно. У каждого пункта три кнопки: «Подходит», «Изменить», «Не нужно» и поле для комментария. Отмечайте по ходу разговора, внизу соберётся итог. Показаны ваши данные, записи в этом документе ничего в платформе не меняют.</p>
@@ -109,7 +105,7 @@ figcaption{color:var(--mut);font-size:12px;margin-top:6px}
 <div class="vote" role="group" aria-label="Оценка"><button class="v" data-v="ok">Подходит</button><button class="v" data-v="chg">Изменить</button><button class="v" data-v="no">Не нужно</button></div><textarea class="cm" placeholder="Комментарий или ответ на вопрос" rows="2"></textarea></div></div></div></section>
 <section id="dalshe"><div class="sh"><h2>Что будет после ваших ответов</h2><p class="lead">Чтобы было понятно, что дальше.</p></div><div class="body nofig"><div class="items"><div class="card"><ol class="pts"><li>Я собираю ваши отметки и комментарии и вношу правки в платформу. «Не нужно» убираю, «Изменить» переделываю.</li><li>Показываю обновлённую версию и закрываем оставшиеся вопросы.</li><li>Выбираем сервер и домен в России, чтобы платформа работала у вас, а не у меня на компьютере.</li><li>Пилот: 3–4 швеи вводят данные в приложении параллельно с бумагой, мы сверяем результаты.</li><li>Если пилот проходит нормально, подключаем весь цех.</li></ol></div></div></div></section>
 <section id="itog" class="end"><div class="sh"><h2>Итог обсуждения</h2><p class="lead">Собирается из ваших отметок. Нажмите «Отправить результаты», и они придут Виктории. Если отправка не сработает, скопируйте итог и перешлите текстом. Отметки запоминаются в браузере.</p></div>
-<pre id="out">Пока ничего не отмечено.</pre><div class="sendbox"><input id="who" placeholder="Ваше имя" maxlength="60" aria-label="Ваше имя"><button class="btn pri" id="send2">Отправить результаты</button></div><div id="stat"></div></section>
+<pre id="out">Пока ничего не отмечено.</pre><div class="cnt2">Подходит <b id="c-ok">0</b> · Изменить <b id="c-chg">0</b> · Не нужно <b id="c-no">0</b> · Не отмечено <b id="c-left">43</b></div><div class="sendbox"><input id="who" placeholder="Ваше имя" maxlength="60" aria-label="Ваше имя"><button class="btn pri" id="send2">Отправить результаты</button><button class="btn" id="copy">Скопировать итог</button><button class="btn" id="reset">Сбросить отметки</button></div><div id="stat"></div></section>
 </div>
 <script>
 var N=43,KEY='sp-platform-vote-v1',st={};
@@ -121,6 +117,7 @@ function render(){
   var c={ok:0,chg:0,no:0};
   items.forEach(function(it){var s=st[it.dataset.id]||{};if(s.v){it.dataset.s=s.v;c[s.v]++}else it.removeAttribute('data-s');var ta=it.querySelector('.cm');if(document.activeElement!==ta)ta.value=s.c||'';it.classList.toggle('hascm',!!s.c)});
   document.getElementById('c-ok').textContent=c.ok;document.getElementById('c-chg').textContent=c.chg;document.getElementById('c-no').textContent=c.no;document.getElementById('c-left').textContent=N-c.ok-c.chg-c.no;
+  document.getElementById('prog').textContent='Отмечено '+(c.ok+c.chg+c.no)+' из '+N;
   document.getElementById('out').textContent=summary();
 }
 function summary(){
@@ -146,7 +143,7 @@ if(!SID){SID='plat-'+Math.random().toString(36).slice(2,10)+Date.now().toString(
 var whoEl=document.getElementById('who');try{whoEl.value=localStorage.getItem('sp-platform-who')||''}catch(e){}
 whoEl.addEventListener('input',function(){try{localStorage.setItem('sp-platform-who',whoEl.value)}catch(e){}});
 function chunks(t,n){var o=[],a=t.split('\n'),c='';a.forEach(function(l){if((c+'\n'+l).length>n&&c){o.push(c);c=l}else c=c?c+'\n'+l:l});if(c)o.push(c);return o}
-function setStat(t,bad){var e=document.getElementById('stat');e.textContent=t;e.style.color=bad?'#FF6B6F':'#4ADE9B'}
+function setStat(t,bad){var e=document.getElementById('stat');e.textContent=t;e.style.color=bad?'#FF6B6F':'#4ADE9B';var tt=document.getElementById('toast');tt.textContent=t;tt.style.color=bad?'#FF6B6F':'#4ADE9B';tt.style.display='block';clearTimeout(setStat.t);setStat.t=setTimeout(function(){tt.style.display='none'},5000)}
 async function sendResults(btn){
   var who=(whoEl.value||'').trim();
   var done=items.filter(function(it){return (st[it.dataset.id]||{}).v}).length;
@@ -164,7 +161,7 @@ async function sendResults(btn){
   }catch(e){setStat('Не получилось отправить. Нажмите «Скопировать итог» и перешлите текст вручную.',true)}
   btn.disabled=false;
 }
-document.getElementById('send').onclick=function(){document.getElementById('itog').scrollIntoView();sendResults(this)};
+document.getElementById('send').onclick=function(){sendResults(this)};
 document.getElementById('send2').onclick=function(){sendResults(this)};
 
 var lb=document.createElement('div');lb.style.cssText='position:fixed;inset:0;background:rgba(5,6,10,.92);display:none;align-items:center;justify-content:center;z-index:50;cursor:zoom-out;padding:20px';lb.innerHTML='<img style="max-width:100%;max-height:100%;border-radius:14px">';document.body.appendChild(lb);
